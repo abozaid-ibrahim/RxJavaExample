@@ -12,6 +12,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
+
+
+/*
+* https://www.androidhive.info/RxJava/android-getting-started-with-reactive-programming/
+* */
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
