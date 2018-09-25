@@ -9,23 +9,24 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
     private Disposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
         Observable<String> animalsObservable = Observable.just("Ant", "Bee", "Cat", "Dog", "Fox");
+        initMethod();
 
     }
 
@@ -54,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private Observable<String> getAnimalsObservable() {
+  /*  private Observable<String> getAnimalsObservable() {
         return Observable.just("Ant", "Bee", "Cat", "Dog", "Fox");
 
-    }
+    }*/
 
 
-    private main() {
+    private void initMethod() {
         // observable
         Observable<String> animalsObservable = getAnimalsObservable();
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(new Predicate<String>() {
                     @Override
-                    public boolean test(String s) throws Exception {
+                    public boolean test(String s) {
                         return s.toLowerCase().startsWith("b");
                     }
                 })
@@ -118,8 +119,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        // don't send events once the activity is destroyed
         disposable.dispose();
     }
 
